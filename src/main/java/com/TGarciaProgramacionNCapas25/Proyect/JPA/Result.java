@@ -10,5 +10,6 @@ public class Result {
     public Exception ex;
     public Object object;
     public List<Object> objects;
+    public int Status;
     
 }

@@ -1,6 +1,7 @@
 
 package com.TGarciaProgramacionNCapas25.Proyect.DAO;
 
+
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Municipio;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 import jakarta.persistence.EntityManager;
@@ -17,27 +18,19 @@ public class MunicipioJPADAOImplementation implements IMunicipioJPADAO {
     private EntityManager entityManager;
 
     @Override
-    public Result MunicipioByEstado(int IdEstado) {
+    public Result MunicipioByEstado(int idEstado) {
         Result result = new Result();
-        
-        try{
-            TypedQuery<Municipio> query = entityManager.createQuery(
-                    "FROM Municipio WHERE Municipio.Estado.IdEstado = :IdEstado", Municipio.class);
-           query.setParameter("IdEstado", IdEstado);
-            
-            List<Municipio> municipios = query.getResultList();
-            result.objects = new ArrayList<>();
-            
-            for(Municipio municipio : municipios){
-                result.objects.add(municipio);
-            }
-            System.out.println(result.objects.size());
-            result.correct=true;
-            
-        }catch(Exception ex){
-            result.correct= false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex= ex;
+
+        try {
+
+            Municipio municipio = entityManager.find(Municipio.class, idEstado);
+            result.object = municipio;
+            result.correct = true;
+
+        } catch (Exception ex) {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
         }
         return result;
     

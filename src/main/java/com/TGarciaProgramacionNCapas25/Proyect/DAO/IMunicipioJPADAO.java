@@ -6,6 +6,6 @@ import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 
 public interface IMunicipioJPADAO {
     
-    Result MunicipioByEstado(int IdMunicipio);
+    Result MunicipioByEstado(int idEstado);
     
 }

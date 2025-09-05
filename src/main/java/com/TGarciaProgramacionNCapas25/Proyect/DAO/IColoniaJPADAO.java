@@ -7,7 +7,7 @@ import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 
 public interface IColoniaJPADAO {
     
-    Result ColoniaByMunicipio(int IdColonia);
+    Result ColoniaByMunicipio(Long idColonia);
     
     
 }

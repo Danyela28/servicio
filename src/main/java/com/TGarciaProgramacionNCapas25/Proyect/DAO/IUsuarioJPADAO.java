@@ -8,7 +8,7 @@ public interface IUsuarioJPADAO {
     
     Result GetAll();
     Result Add(Usuario usuario);
-//    Result Delete(int IdUsuario);
-//    Result UpDate(com.TGarciaProgramacionNCapas25.Proyect.ML.Usuario usuarioML);
-//    Result GetById(int IdUsuario);
+    Result Delete(Long id);
+    Result Update(Usuario usuario);
+    Result GetById(int id);
 }

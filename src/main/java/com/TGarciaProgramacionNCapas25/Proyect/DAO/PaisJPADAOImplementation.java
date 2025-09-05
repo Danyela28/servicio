@@ -25,14 +25,8 @@ public class PaisJPADAOImplementation implements IPaisJPADAO{
         try{
             
             TypedQuery<Pais> queryPais = entityManager.createQuery("FROM Pais ORDER BY IdPais", Pais.class);
-            List<Pais> paises = queryPais.getResultList();
+            result.object = queryPais.getResultList();
             
-            result.objects = new ArrayList<>();
-            
-            for(Pais pais : paises){
-                result.objects.add(pais);
-            }
-            System.out.println(result.objects.size());
             result.correct=true;
             
         }catch(Exception ex){

@@ -20,27 +20,19 @@ public class ColoniaJPADAOImplementation implements IColoniaJPADAO {
     private EntityManager entityManager;
 
     @Override
-    public Result ColoniaByMunicipio(int IdMunicipio) {
+    public Result ColoniaByMunicipio(Long idMunicipio) {
         Result result = new Result();
+
         try {
-            TypedQuery<Colonia> query = entityManager.createQuery(
-                "FROM Colonia WHERE Municipio.IdMunicipio = :IdMunicipio", Colonia.class);
-            query.setParameter("IdMunicipio", IdMunicipio);
-            
-            List<Colonia> colonias = query.getResultList();
-            result.objects = new ArrayList<>();
-            
-            for(Colonia colonia : colonias){
-                result.objects.add(colonia);
-            }
-            System.out.println(result.objects.size());
-            result.correct=true;
+
+            Colonia colonia = entityManager.find(Colonia.class, idMunicipio);
+            result.object = colonia;
+            result.correct = true;
 
         } catch (Exception ex) {
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex= ex;
-            
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
         }
         return result;
     }

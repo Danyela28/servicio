@@ -18,29 +18,20 @@ public class EstadoJPADAOImplementation implements IEstadoJPADAO {
     private EntityManager entityManager;
 
     @Override
-    public Result EstadoByPais(int IdPais) {
+    public Result EstadoByPais(int idPais) {
         
         Result result = new Result();
-        
-        try{
-            TypedQuery<Estado> query = entityManager.createQuery(
-                    "FROM Estado WHERE Estado.Pais.IdPais = :IdPais", Estado.class);
-            query.setParameter("IdPais", IdPais);
-            
-            List<Estado> estados = query.getResultList();
-            result.objects = new ArrayList<>();
-            
-            for(Estado estado : estados){
-                result.objects.add(estado);
-            }
-            System.out.println(result.objects.size());
-            result.correct=true;
-            
-            
-        }catch(Exception ex){
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex=ex;
+
+        try {
+
+            Estado estado = entityManager.find(Estado.class, idPais);
+            result.object = estado;
+            result.correct = true;
+
+        } catch (Exception ex) {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
         }
         return result;
     }

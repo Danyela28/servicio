@@ -1,6 +1,7 @@
 
 package com.TGarciaProgramacionNCapas25.Proyect.JPA;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,7 @@ public class Usuario {
     @Column(name="apellidopaterno")
     private String ApellidoPaterno;
     @Column(name="fechanacimiento")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date FechaNacimiento;
     @Column(name="celular")
     private String Celular;

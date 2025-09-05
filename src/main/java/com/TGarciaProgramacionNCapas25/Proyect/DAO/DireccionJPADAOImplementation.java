@@ -18,66 +18,84 @@ public class DireccionJPADAOImplementation implements IDireccionJPADAO{
 
     @Transactional
     @Override
-    public Result UpDate(com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario usuarioJPA) {
+    public Result UpDate(Direccion direccion) {
+        Result result = new Result();
         
-//        Result result = new Result();
-//        
-//        try{
-//            Direccion direccionJPA = new Direccion(usuarioML);
-//            entityManager.merge(direccionJPA);
-//            result.correct = true;
-//            
-//        }catch(Exception ex){
-//            result.correct=false;
-//            result.errorMessage=ex.getLocalizedMessage();
-//            result.ex= ex;
-//        }
+        try{
+            Direccion direccionBD = entityManager.find(Direccion.class, direccion.getIdDireccion()); //direccion de la base de datos
+            
+            // asignando datos de direccion sobre la misma direccion, en que momento actualizas direccionBD??
+            if(direccionBD !=null){
+                direccionBD.setCalle(direccion.getCalle()); 
+                direccionBD.setNumeroExterior(direccion.getNumeroExterior());
+                direccionBD.setNumeroInterior(direccion.getNumeroInterior());
+                
+                entityManager.merge(direccionBD); // merge a direccion traida de la base de datos (sin ningun dato nuevo)
+                result.correct = true;
+                result.object = direccionBD;
+                result.Status=200;
+            }else{
+                result.correct=false;
+                result.errorMessage="Direccion no encontrada, id incorrecto";
+                result.Status = 400;
+            }
+        }catch(Exception ex){
+            result.correct=false;
+            result.errorMessage=ex.getLocalizedMessage();
+            result.ex=ex;
+            result.Status=500;
+        }
+        return result;
+        
+    }
+    
+    @Transactional
+    @Override
+    public Result Delete(Long idDireccion) {
+        
+        Result result = new Result();
+        
+        try{
+            Direccion direccion = entityManager.find(Direccion.class, idDireccion);
+           
+            entityManager.remove(direccion);
+            result.object = direccion;
+            result.correct=true;
+            
+        }catch(Exception ex){
+            result.correct=false;
+            result.errorMessage=ex.getLocalizedMessage();
+            result.ex=ex;
+        }
+        
+        return result;
+    }
+
+    @Override
+    public Result GetById(Long idDireccion) {
+        Result result = new Result();
+        
+        try{
+            Direccion direccion = entityManager.find(Direccion.class, idDireccion);
+
+            result.object=direccion;
+            result.correct=true;
+            
+        }catch(Exception ex){
+            result.correct=false;
+            result.errorMessage=ex.getLocalizedMessage();
+            result.ex=ex;
+        }
+        return result;
+    }
+
+    @Override
+    public Result Add(Direccion direccion) {
+        
         return null;
         
     }
     
-//    @Transactional
-//    @Override
-//    public Result Delete(int IdDireccion) {
-//        
-//        Result result = new Result();
-//        
-//        try{
-//            Direccion direccionJPA = entityManager.find(Direccion.class, IdDireccion);
-//            entityManager.remove(direccionJPA);
-//            
-//            result.correct=true;
-//            
-//        }catch(Exception ex){
-//            result.correct=false;
-//            result.errorMessage=ex.getLocalizedMessage();
-//            result.ex=ex;
-//        }
-//        
-//        return result;
-//    }
-//
-//    @Override
-//    public Result GetById(int IdDireccion) {
-//        Result result = new Result();
-//        
-//        try{
-//            Direccion direccionJPA = entityManager.find(Direccion.class, IdDireccion);
-//            com.TGarciaProgramacionNCapas25.Proyect.ML.Direccion direccionML = new com.TGarciaProgramacionNCapas25.Proyect.ML.Direccion(direccionJPA);
-//            com.TGarciaProgramacionNCapas25.Proyect.ML.Usuario usuarioML = new com.TGarciaProgramacionNCapas25.Proyect.ML.Usuario();
-//            
-//            usuarioML.Direcciones.add(direccionML);
-//            
-//            result.object=direccionML;
-//            result.correct=true;
-//            
-//        }catch(Exception ex){
-//            result.correct=false;
-//            result.errorMessage=ex.getLocalizedMessage();
-//            result.ex=ex;
-//        }
-//        return result;
-//    }
     
-    
+
 }

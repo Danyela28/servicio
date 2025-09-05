@@ -26,16 +26,10 @@ public class RolJPADAOImplementation implements IRolJPADAO {
         
         try {
             TypedQuery<Rol> queryUsuario = entityManager.createQuery("FROM Rol ORDER BY IdRol", Rol.class);
-            List<Rol> roles = queryUsuario.getResultList();
+            result.object = queryUsuario.getResultList();
 
-            result.objects = new ArrayList<>();
-
-            for (Rol rol : roles) {
-                result.objects.add(rol);
-            }
-
-            System.out.println(result.objects.size());
-            result.correct = true;
+             result.correct=true;
+             
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
             result.correct = false;
