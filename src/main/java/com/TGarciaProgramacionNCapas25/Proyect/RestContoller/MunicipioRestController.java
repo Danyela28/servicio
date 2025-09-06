@@ -17,24 +17,17 @@ public class MunicipioRestController {
     @Autowired
     private MunicipioJPADAOImplementation municipioJPADAOImplementation;
     
-    @GetMapping("/{id}")
-    public ResponseEntity <Result>MunicipioByEstado(@PathVariable int id){
-        
-        Result result = new Result();
-        
-        try{
-            result = municipioJPADAOImplementation.MunicipioByEstado(id);
-            result.correct=true;
-            return ResponseEntity.status(200).body(result);
-            
-            
-        }catch(Exception ex){
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex=ex;
-            return ResponseEntity.status(500).body(result);
-        }
-        
+    @GetMapping()
+    public ResponseEntity GetAll() {
+        Result result = municipioJPADAOImplementation.GetAll();
+        return ResponseEntity.status(result.Status).body(result);
     }
-    
+
+    @GetMapping("/{IdEstado}")
+    public ResponseEntity GetByEstado(@PathVariable int IdEstado) {
+        Result result = municipioJPADAOImplementation.GetByEstado(IdEstado);
+        return ResponseEntity.status(result.Status).body(result);
+    }
 }
+    
+

@@ -8,7 +8,8 @@ public interface IUsuarioJPADAO {
     
     Result GetAll();
     Result Add(Usuario usuario);
-    Result Delete(Long id);
+    Result Delete(int IdUsuario);
     Result Update(Usuario usuario);
-    Result GetById(int id);
+    Result GetById(int IdUsuario);
+    Result LogicalDelete(int IdUsuario);
 }

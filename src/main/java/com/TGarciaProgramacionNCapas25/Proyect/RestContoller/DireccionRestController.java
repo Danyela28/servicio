@@ -40,46 +40,43 @@ public class DireccionRestController {
             return ResponseEntity.status(500).body(result);
         }
     }
-    //ACTUALIZAR UNA DIRECCION ESPECIFICA
-    @PutMapping("/{IdDireccion}")
-    public ResponseEntity<Result>UpDate(@PathVariable int IdDireccion, @RequestBody Direccion direccion){
-        
-        Result result = new Result();
-        
-        
-            direccion.setIdDireccion(IdDireccion);
-            
-            result=direccionJPADAOImplementation.UpDate(direccion);
-            
-            return ResponseEntity.status(result.Status).body(result);
-    
 
+    
+    @PostMapping()
+    public ResponseEntity Add(@RequestBody Usuario usuario) {
+        Result result = new Result();
+        try{
+            result = direccionJPADAOImplementation.Add(usuario);
+            result.correct=true;
+            return ResponseEntity.status(200).body(result);
+            
+        }catch(Exception ex){
+            result.correct=false;
+            result.errorMessage=ex.getLocalizedMessage();
+            result.ex=ex;
+            return ResponseEntity.status(500).body(result);
         }
+       
+
+    }
     
-    
-    
-    //AGREGAR DIRECCION
-//    @PostMapping("{idUsuario}")
-//    public ResponseEntity<Result> Add(@PathVariable int idUsuario, @RequestBody Direccion direccion){
-//        
-//            Result result = new Result();
-//            
-//            
-//                
-//                
-//                
-//            }
-//        
-//    }
+    //ACTUALIZAR UNA DIRECCION ESPECIFICA
+    @PutMapping("{IdDireccion}")
+    public ResponseEntity Update(@PathVariable int IdDireccion,
+            @RequestBody Usuario usuario) {
+        usuario.Direcciones.get(0).setIdDireccion(IdDireccion);
+        Result result = direccionJPADAOImplementation.Update(usuario);
+        return ResponseEntity.status(result.Status).body(result);
+    }
 
     
     //GETBYID
-    @GetMapping("/{id}")
-    public ResponseEntity<Result>GetById(@PathVariable Long id){
+    @GetMapping("/{IdDireccion}")
+    public ResponseEntity<Result>GetById(@PathVariable int IdDireccion){
         Result result = new Result();
         
         try{
-            result = direccionJPADAOImplementation.GetById(id);
+            result = direccionJPADAOImplementation.GetById(IdDireccion);
             result.correct=true;
             return ResponseEntity.status(200).body(result);
             

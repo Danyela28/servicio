@@ -18,23 +18,35 @@ public class EstadoRestController {
     private EstadoJPADAOImplementation estadoJPADAOImplementation;
     
     //GETBYID
-    @GetMapping("/{id}")
-    public ResponseEntity<Result>EstadoByPais(@PathVariable int id){
-        
-        Result result = new Result();
-        
-        try{
-            result = estadoJPADAOImplementation.EstadoByPais(id);
-            result.correct=true;
-            return ResponseEntity.status(200).body(result);
-            
-            
-        }catch(Exception ex){
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex=ex;
-            return ResponseEntity.status(500).body(result);
-        }
+    @GetMapping()
+    public ResponseEntity GetAll() {
+        Result result = estadoJPADAOImplementation.GetAll();
+        return ResponseEntity.status(result.Status).body(result);
     }
-    
+
+    @GetMapping("/{IdPais}")
+    public ResponseEntity GetByPais(@PathVariable int IdPais) {
+        Result result = estadoJPADAOImplementation.GetByIdPais(IdPais);
+        return ResponseEntity.status(result.Status).body(result);
+    }
 }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Result>EstadoByPais(@PathVariable int id){
+//        
+//        Result result = new Result();
+//        
+//        try{
+//            result = estadoJPADAOImplementation.EstadoByPais(id);
+//            result.correct=true;
+//            return ResponseEntity.status(200).body(result);
+//            
+//            
+//        }catch(Exception ex){
+//            result.correct=false;
+//            result.errorMessage=ex.getLocalizedMessage();
+//            result.ex=ex;
+//            return ResponseEntity.status(500).body(result);
+//        }
+//    }
+    
+

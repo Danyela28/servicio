@@ -51,6 +51,8 @@ public class Usuario {
     @Lob
     @Column( name="imagen")
     private String Imagen;
+    @Column(name = "status")
+    private int Status = 1;
     @ManyToOne
     @JoinColumn (name="idrol")
     public Rol Rol;
@@ -60,6 +62,24 @@ public class Usuario {
    
             
     public Usuario(){}
+    
+    public Usuario(String Nombre, String ApellidoPaterno, String ApellidoMaterno, Date FechaNacimiento, String Celular, String UserName, 
+            String Email, String Password, String Sexo, String Telefono, String CURP, String Imagen, int Status, Rol rol){
+        this.Nombre=Nombre;
+        this.ApellidoPaterno=ApellidoPaterno;
+        this.ApellidoMaterno=ApellidoMaterno;
+        this.FechaNacimiento=FechaNacimiento;
+        this.Celular=Celular;
+        this.UserName=UserName;
+        this.Email=Email;
+        this.Sexo=Sexo;
+        this.Password=Password;
+        this.Telefono=Telefono;
+        this.CURP=CURP;
+        this.Imagen=Imagen;
+        this.Status= Status;
+        this.Rol= rol;
+    }
     
     
     public void setIdUsuario(int idUsuario){
@@ -147,6 +167,14 @@ public class Usuario {
 
     public void setImagen(String Imagen) {
         this.Imagen = Imagen;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
 
     

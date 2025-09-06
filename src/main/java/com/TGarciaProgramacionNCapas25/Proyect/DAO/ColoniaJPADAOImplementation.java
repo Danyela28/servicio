@@ -19,20 +19,50 @@ public class ColoniaJPADAOImplementation implements IColoniaJPADAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public Result ColoniaByMunicipio(Long idMunicipio) {
+     @Override
+    public Result GetAll() {
         Result result = new Result();
 
         try {
-
-            Colonia colonia = entityManager.find(Colonia.class, idMunicipio);
-            result.object = colonia;
+            TypedQuery<Colonia> queryColonia
+                    = entityManager.createQuery("FROM colonia", Colonia.class);
+            List<Colonia> colonias = queryColonia.getResultList();
+            result.objects = new ArrayList<>();
+            for (Colonia colonia : colonias) {
+                result.objects.add(colonia);
+            }
             result.correct = true;
+            result.Status = 200;
 
         } catch (Exception ex) {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
             result.ex = ex;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.correct = false;
+            result.Status = 500;
+
+        }
+        return result;
+    }
+
+    @Override
+    public Result GetByIdMunicipio(int IdMunicipio) {
+        Result result = new Result();
+        try {
+            TypedQuery<Colonia> queryColonia
+                    = entityManager.createQuery("FROM colonia c WHERE c.Municipio.IdMunicipio = :idmunicipio", Colonia.class);
+            queryColonia.setParameter("idmunicipio", IdMunicipio);
+            List<Colonia> colonias = queryColonia.getResultList();
+            result.objects = new ArrayList<>();
+            for (Colonia colonia : colonias) {
+                result.objects.add(colonia);
+            }
+            result.correct = true;
+            result.Status = 200;
+        } catch (Exception ex) {
+            result.ex = ex;
+            result.Status = 500;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.correct = false;
         }
         return result;
     }

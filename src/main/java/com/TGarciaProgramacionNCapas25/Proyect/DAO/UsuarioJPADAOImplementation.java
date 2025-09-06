@@ -18,7 +18,8 @@ public class UsuarioJPADAOImplementation implements IUsuarioJPADAO {
 
     @Autowired
     private EntityManager entityManager;
-
+    
+    @Transactional
     @Override
     public Result GetAll() {
 
@@ -67,11 +68,11 @@ public class UsuarioJPADAOImplementation implements IUsuarioJPADAO {
 
     @Transactional
     @Override
-    public Result Delete(Long id) {
+    public Result Delete(int IdUsuario) {
         Result result = new Result();
 
         try {
-            Usuario usuario = entityManager.find(Usuario.class, id);
+            Usuario usuario = entityManager.find(Usuario.class, IdUsuario);
 
             entityManager.remove(usuario);
             result.object = usuario;
@@ -127,14 +128,14 @@ public class UsuarioJPADAOImplementation implements IUsuarioJPADAO {
             return result;
         }
     
-
+    @Transactional
     @Override
-    public Result GetById(int id) {
+    public Result GetById(int IdUsuario) {
         Result result = new Result();
 
         try {
 
-            Usuario usuario = entityManager.find(Usuario.class, id);
+            Usuario usuario = entityManager.find(Usuario.class, IdUsuario);
             result.object = usuario;
             result.correct = true;
 
@@ -145,5 +146,31 @@ public class UsuarioJPADAOImplementation implements IUsuarioJPADAO {
         }
         return result;
     }
+    @Transactional
+    @Override
+    public Result LogicalDelete(int IdUsuario) {
+        Result result = new Result();
+
+        try {
+            Usuario usuarioJPA = entityManager.find(Usuario.class, IdUsuario);
+            if (usuarioJPA != null) {
+                usuarioJPA.setStatus(usuarioJPA.getStatus() == 1 ? 0 : 1);
+                entityManager.merge(usuarioJPA);
+                result.correct = true;
+                result.Status = 200;
+            } else {
+                result.errorMessage = "Usuario no encontrado";
+                result.Status = 400;
+            }
+
+        } catch (Exception ex) {
+            result.Status = 500;
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        return result;
+    }
+    
 
 }

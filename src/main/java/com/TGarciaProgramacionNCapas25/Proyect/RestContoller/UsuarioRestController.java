@@ -57,7 +57,6 @@ public class UsuarioRestController {
         Result result = new Result();
         try{
             result = usuarioJPADAOImplementation.Add(usuario);
-            result.correct = true;
             return ResponseEntity.status(201).body(result);
             
         }catch(Exception ex){
@@ -83,11 +82,11 @@ public class UsuarioRestController {
     
     
     //ELIMINAR USUARIO
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Result> Delete(@PathVariable Long id){
+    @DeleteMapping("/{IdUsuario}")
+    public ResponseEntity<Result> Delete(@PathVariable int IdUsuario){
         Result result = new Result();
         try{
-            result = usuarioJPADAOImplementation.Delete(id);
+            result = usuarioJPADAOImplementation.Delete(IdUsuario);
             result.correct= true;
             return ResponseEntity.status(200).body(result);
             
@@ -100,12 +99,12 @@ public class UsuarioRestController {
     }
     
     //USUARIO BUSQUEDA POR ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Result>GetById(@PathVariable int id){
+    @GetMapping("/{IdUsuario}")
+    public ResponseEntity<Result>GetById(@PathVariable int IdUsuario){
         Result result = new Result();
         
         try{
-            result = usuarioJPADAOImplementation.GetById(id);
+            result = usuarioJPADAOImplementation.GetById(IdUsuario);
             result.correct=true;
             return ResponseEntity.status(200).body(result);
         }catch(Exception ex){
@@ -115,10 +114,10 @@ public class UsuarioRestController {
             return ResponseEntity.status(500).body(result);
         }
     }
-    
-
-    
-
-   
+   @PatchMapping("/estatus/{IdUsuario}")
+    public ResponseEntity LogicalDelete(@PathVariable int IdUsuario) {
+        Result result = usuarioJPADAOImplementation.LogicalDelete(IdUsuario);
+        return ResponseEntity.status(result.Status).body(result);
+    }
 
 }

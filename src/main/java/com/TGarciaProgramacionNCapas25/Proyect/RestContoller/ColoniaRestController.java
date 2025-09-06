@@ -17,21 +17,16 @@ public class ColoniaRestController {
     @Autowired
     private ColoniaJPADAOImplementation coloniaJPADAOImplementation;
     
-    @GetMapping("/{id}")
-    public ResponseEntity <Result> ColoniaByMunicipio(@PathVariable Long idMunicipio){
-        
-        Result result = new Result();
-        try{
-            result = coloniaJPADAOImplementation.ColoniaByMunicipio(idMunicipio);
-            result.correct=true;
-            return ResponseEntity.status(500).body(result);
-        }catch(Exception ex){
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.ex=ex;
-            return ResponseEntity.status(500).body(result);
-        }
-        
+    @GetMapping()
+    public ResponseEntity GetAll() {
+        Result result = coloniaJPADAOImplementation.GetAll();
+        return ResponseEntity.status(result.Status).body(result);
+    }
+
+    @GetMapping("/{IdMunicipio}")
+    public ResponseEntity GetByMunicipio(@PathVariable int IdMunicipio) {
+        Result result = coloniaJPADAOImplementation.GetByIdMunicipio(IdMunicipio);
+        return ResponseEntity.status(result.Status).body(result);
     }
     
     

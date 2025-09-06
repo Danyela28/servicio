@@ -33,9 +33,16 @@ public class Direccion {
     public Usuario Usuario;
 
    
-    public Direccion(){}
+    public Direccion(Usuario usuarioJPA){}
    
-    
+  
+    public void actualizarDatos(String calle, String numeroInterior, String numeroExterior, Usuario usuario, Colonia colonia) {
+        this.Calle = calle;
+        this.NumeroInterior = numeroInterior;
+        this.NumeroExterior = numeroExterior;
+        this.Usuario = usuario; 
+        this.colonia = colonia; 
+    }
     public Direccion(int IdDireccion) {
         this.IdDireccion = IdDireccion;
     }
@@ -71,6 +78,8 @@ public class Direccion {
     public void setNumeroExterior(String NumeroExterior) {
         this.NumeroExterior = NumeroExterior;
     }
+
+    
 
   
 }
