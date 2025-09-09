@@ -6,6 +6,9 @@ import com.TGarciaProgramacionNCapas25.Proyect.DAO.DireccionJPADAOImplementation
 import com.TGarciaProgramacionNCapas25.Proyect.DAO.UsuarioJPADAOImplementation;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name="Controller de Usuario", description="Controla los metodos del Usuario")
 @RestController
 @RequestMapping("usuarioapi")
 public class UsuarioRestController {
@@ -30,6 +34,9 @@ public class UsuarioRestController {
     
     //MOSTRAR TODOS
     @GetMapping
+    @Operation(description="Metodo para retornar a todos los usuarios")
+    @ApiResponse(responseCode = "200", description = "Usuarios encontrados")
+    @ApiResponse(responseCode = "500", description = "proceso no exitoso")
     public ResponseEntity GetAll(){
         
         Result result;
@@ -52,6 +59,9 @@ public class UsuarioRestController {
     
     //AGREGAR USUARIO
     @PostMapping
+    @Operation(description="Metodo para agregar a un usuario completo")
+    @ApiResponse(responseCode = "200", description = "Usuario agregado ")
+    @ApiResponse(responseCode = "500", description = "Error al agregar usuario")
     public ResponseEntity Add(@RequestBody Usuario usuario){
         
         Result result = new Result();
@@ -70,6 +80,9 @@ public class UsuarioRestController {
     
     //MODIFICAR USUARIO
     @PutMapping("/{IdUsuario}")
+    @Operation(description="Metodo para modificar al usuario")
+    @ApiResponse(responseCode = "200", description = "Usuario modificado exitosamente")
+    @ApiResponse(responseCode = "500", description = "Proceso no exitoso")
     public ResponseEntity<Result>Update(@PathVariable int IdUsuario, @RequestBody Usuario usuario){
         
         usuario.setIdUsuario(IdUsuario);
@@ -83,6 +96,9 @@ public class UsuarioRestController {
     
     //ELIMINAR USUARIO
     @DeleteMapping("/{IdUsuario}")
+    @Operation(description="Metodo para eliminar al usuario del index")
+    @ApiResponse(responseCode = "200", description = "Usuario Eliminado")
+    @ApiResponse(responseCode = "404", description = "Usuario NO Eliminado")
     public ResponseEntity<Result> Delete(@PathVariable int IdUsuario){
         Result result = new Result();
         try{
@@ -100,6 +116,9 @@ public class UsuarioRestController {
     
     //USUARIO BUSQUEDA POR ID
     @GetMapping("/{IdUsuario}")
+    @Operation(description="Metodo para obtener la informacion de un uduario en especial")
+    @ApiResponse(responseCode = "200", description = "Usuario encontrado")
+    @ApiResponse(responseCode = "500", description = "Usuario no encontrado")
     public ResponseEntity<Result>GetById(@PathVariable int IdUsuario){
         Result result = new Result();
         
@@ -115,8 +134,9 @@ public class UsuarioRestController {
         }
     }
    @PatchMapping("/estatus/{IdUsuario}")
-    public ResponseEntity LogicalDelete(@PathVariable int IdUsuario) {
-        Result result = usuarioJPADAOImplementation.LogicalDelete(IdUsuario);
+   @Operation(description="Metodo para hacer una baja logica")
+    public ResponseEntity BajaLogica(@PathVariable int IdUsuario) {
+        Result result = usuarioJPADAOImplementation.BajaLogica(IdUsuario);
         return ResponseEntity.status(result.Status).body(result);
     }
 

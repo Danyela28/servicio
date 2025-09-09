@@ -33,6 +33,7 @@ public class Direccion {
     public Usuario Usuario;
 
    
+    public Direccion(){}
     public Direccion(Usuario usuarioJPA){}
    
   

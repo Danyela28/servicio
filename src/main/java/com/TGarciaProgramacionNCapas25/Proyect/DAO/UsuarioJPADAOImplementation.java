@@ -148,7 +148,7 @@ public class UsuarioJPADAOImplementation implements IUsuarioJPADAO {
     }
     @Transactional
     @Override
-    public Result LogicalDelete(int IdUsuario) {
+    public Result BajaLogica(int IdUsuario) {
         Result result = new Result();
 
         try {

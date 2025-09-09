@@ -5,6 +5,8 @@ import com.TGarciaProgramacionNCapas25.Proyect.DAO.DireccionJPADAOImplementation
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Direccion;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name="Controller de Direccion", description="Controla los metodos para las Direcciones")
 @RestController
 @RequestMapping("direccionapi")
 public class DireccionRestController {
@@ -26,6 +29,7 @@ public class DireccionRestController {
         
     //ELIMINAR DIRECCION
     @DeleteMapping("/{idUsuario}/direcciones/{idDireccion}")
+    @Operation(description="Metodo para eliminar una Direccion")
     public ResponseEntity<Result>DeleteDireccion(@PathVariable Long idUsuario, @PathVariable Long idDireccion){
         Result result = new Result();
         try{
@@ -43,6 +47,7 @@ public class DireccionRestController {
 
     
     @PostMapping()
+    @Operation(description="Metodo para agregar una direccion")
     public ResponseEntity Add(@RequestBody Usuario usuario) {
         Result result = new Result();
         try{
@@ -62,6 +67,7 @@ public class DireccionRestController {
     
     //ACTUALIZAR UNA DIRECCION ESPECIFICA
     @PutMapping("{IdDireccion}")
+    @Operation(description="Metodo para actualizar una direccion especifica")
     public ResponseEntity Update(@PathVariable int IdDireccion,
             @RequestBody Usuario usuario) {
         usuario.Direcciones.get(0).setIdDireccion(IdDireccion);
@@ -72,6 +78,7 @@ public class DireccionRestController {
     
     //GETBYID
     @GetMapping("/{IdDireccion}")
+    @Operation(description="Metodo para sacar una direccion especifica")
     public ResponseEntity<Result>GetById(@PathVariable int IdDireccion){
         Result result = new Result();
         

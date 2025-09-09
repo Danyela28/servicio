@@ -11,5 +11,5 @@ public interface IUsuarioJPADAO {
     Result Delete(int IdUsuario);
     Result Update(Usuario usuario);
     Result GetById(int IdUsuario);
-    Result LogicalDelete(int IdUsuario);
+    Result BajaLogica(int IdUsuario);
 }
