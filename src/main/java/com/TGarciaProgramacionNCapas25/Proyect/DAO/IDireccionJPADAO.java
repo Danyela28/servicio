@@ -11,7 +11,7 @@ public interface IDireccionJPADAO {
     
     Result Add(Usuario usuario);
     Result Update(Usuario usuario);
-    Result Delete(Long idDireccion);
+    Result Delete(int IdDireccion);
     Result GetById(int IdDireccion);
 
 }

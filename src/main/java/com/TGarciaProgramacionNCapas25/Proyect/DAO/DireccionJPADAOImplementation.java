@@ -51,12 +51,12 @@ public class DireccionJPADAOImplementation implements IDireccionJPADAO{
     
     @Transactional
     @Override
-    public Result Delete(Long idDireccion) {
+    public Result Delete(int IdDireccion) {
         
         Result result = new Result();
         
         try{
-            Direccion direccion = entityManager.find(Direccion.class, idDireccion);
+            Direccion direccion = entityManager.find(Direccion.class, IdDireccion);
            
             entityManager.remove(direccion);
             result.object = direccion;

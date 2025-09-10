@@ -66,6 +66,7 @@ public class UsuarioRestController {
         
         Result result = new Result();
         try{
+            usuario.getIdUsuario();
             result = usuarioJPADAOImplementation.Add(usuario);
             return ResponseEntity.status(201).body(result);
             

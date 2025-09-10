@@ -28,12 +28,12 @@ public class DireccionRestController {
     
         
     //ELIMINAR DIRECCION
-    @DeleteMapping("/{idUsuario}/direcciones/{idDireccion}")
+    @DeleteMapping("/{IdUsuario}/direcciones/{IdDireccion}")
     @Operation(description="Metodo para eliminar una Direccion")
-    public ResponseEntity<Result>DeleteDireccion(@PathVariable Long idUsuario, @PathVariable Long idDireccion){
+    public ResponseEntity<Result>DeleteDireccion(@PathVariable int IdUsuario, @PathVariable int IdDireccion){
         Result result = new Result();
         try{
-            result = direccionJPADAOImplementation.Delete(idDireccion);
+            result = direccionJPADAOImplementation.Delete(IdDireccion);
             result.correct = true;
             return ResponseEntity.status(200).body(result);
             
@@ -51,6 +51,7 @@ public class DireccionRestController {
     public ResponseEntity Add(@RequestBody Usuario usuario) {
         Result result = new Result();
         try{
+            
             result = direccionJPADAOImplementation.Add(usuario);
             result.correct=true;
             return ResponseEntity.status(200).body(result);
