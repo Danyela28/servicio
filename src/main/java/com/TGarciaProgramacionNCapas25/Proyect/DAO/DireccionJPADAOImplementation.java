@@ -18,36 +18,45 @@ public class DireccionJPADAOImplementation implements IDireccionJPADAO{
     @Autowired
     private EntityManager entityManager;
 
-    @Transactional
-    @Override
-    public Result Update(Usuario usuario) {
-        Result result = new Result();
-
-        try {
-            Direccion direccionBD = entityManager.find(Direccion.class, usuario.Direcciones.get(0).getIdDireccion());
-            if (direccionBD != null) {
-                Direccion direccion = usuario.Direcciones.get(0);
-
-                direccionBD.setCalle(direccion.getCalle());
-                direccionBD.setNumeroInterior(direccion.getNumeroInterior());
-                direccionBD.setNumeroExterior(direccion.getNumeroExterior());
-                
-                entityManager.merge(direccionBD);
-                result.correct = true;
-                result.Status = 200;
-            } else {
-                result.Status = 400;
-                result.errorMessage = "Direccion no existe";
-            }
-
-        } catch (Exception ex) {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
-            result.ex = ex;
-        }
-        return result;
-
-    }
+//@Transactional
+//@Override
+//public Result Update(Usuario usuario) {
+//    Result result = new Result();
+//
+//    try {
+//        Direccion direccionBD = entityManager.find(Direccion.class, usuario.Direcciones.get(0).IdDireccion);
+//        
+//        if (direccionBD != null) {
+//            Direccion direccion = usuario.Direcciones.get(0);
+//
+//            // Actualizar campos básicos
+//            direccionBD.Calle = direccion.Calle;
+//            direccionBD.NumeroInterior = direccion.NumeroInterior;
+//            direccionBD.NumeroExterior = direccion.NumeroExterior;
+//            
+//            // Actualizar colonia
+//            if (direccion.colonia != null && direccion.colonia.IdColonia > 0) {
+//                Colonia colonia = entityManager.find(Colonia.class, direccion.colonia.IdColonia);
+//                if (colonia != null) {
+//                    direccionBD.colonia = colonia;
+//                }
+//            }
+//            
+//            entityManager.merge(direccionBD);
+//            result.correct = true;
+//            result.Status = 200;
+//        } else {
+//            result.Status = 400;
+//            result.errorMessage = "Direccion no existe";
+//        }
+//
+//    } catch (Exception ex) {
+//        result.correct = false;
+//        result.errorMessage = ex.getLocalizedMessage();
+//        result.ex = ex;
+//    }
+//    return result;
+//}
     
     @Transactional
     @Override

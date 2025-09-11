@@ -64,17 +64,35 @@ public class DireccionRestController {
         }
        
 
-    }
-    
-    //ACTUALIZAR UNA DIRECCION ESPECIFICA
-    @PutMapping("{IdDireccion}")
-    @Operation(description="Metodo para actualizar una direccion especifica")
-    public ResponseEntity Update(@PathVariable int IdDireccion,
-            @RequestBody Usuario usuario) {
-        usuario.Direcciones.get(0).setIdDireccion(IdDireccion);
-        Result result = direccionJPADAOImplementation.Update(usuario);
-        return ResponseEntity.status(result.Status).body(result);
-    }
+    }    
+//ACTUALIZAR UNA DIRECCION ESPECIFICA
+//@PutMapping("{IdDireccion}")
+//@Operation(description="Metodo para actualizar una direccion especifica")
+//public ResponseEntity Update(@PathVariable int IdDireccion,
+//        @RequestBody Usuario usuario) {
+//    
+//    Result result = new Result();
+//    try {
+//        // Validar que el usuario tenga direcciones
+//        if (usuario.Direcciones == null || usuario.Direcciones.isEmpty()) {
+//            result.Status = 400;
+//            result.errorMessage = "No se proporcionaron direcciones";
+//            return ResponseEntity.status(result.Status).body(result);
+//        }
+//        
+//        // Establecer el ID desde el path variable
+//        usuario.Direcciones.get(0).IdDireccion = IdDireccion;
+//        
+//        result = direccionJPADAOImplementation.Update(usuario);
+//        return ResponseEntity.status(result.Status).body(result);
+//        
+//    } catch (Exception ex) {
+//        result.Status = 500;
+//        result.correct = false;
+//        result.errorMessage = "Error interno: " + ex.getMessage();
+//        return ResponseEntity.status(result.Status).body(result);
+//    }
+//}
 
     
     //GETBYID

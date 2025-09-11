@@ -10,7 +10,7 @@ import com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario;
 public interface IDireccionJPADAO {
     
     Result Add(Usuario usuario);
-    Result Update(Usuario usuario);
+//    Result Update(Usuario usuario);
     Result Delete(int IdDireccion);
     Result GetById(int IdDireccion);
 
