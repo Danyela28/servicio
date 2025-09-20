@@ -6,6 +6,7 @@ import com.TGarciaProgramacionNCapas25.Proyect.JPA.Direccion;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -65,34 +66,15 @@ public class DireccionRestController {
        
 
     }    
-//ACTUALIZAR UNA DIRECCION ESPECIFICA
-//@PutMapping("{IdDireccion}")
-//@Operation(description="Metodo para actualizar una direccion especifica")
-//public ResponseEntity Update(@PathVariable int IdDireccion,
-//        @RequestBody Usuario usuario) {
-//    
-//    Result result = new Result();
-//    try {
-//        // Validar que el usuario tenga direcciones
-//        if (usuario.Direcciones == null || usuario.Direcciones.isEmpty()) {
-//            result.Status = 400;
-//            result.errorMessage = "No se proporcionaron direcciones";
-//            return ResponseEntity.status(result.Status).body(result);
-//        }
-//        
-//        // Establecer el ID desde el path variable
-//        usuario.Direcciones.get(0).IdDireccion = IdDireccion;
-//        
-//        result = direccionJPADAOImplementation.Update(usuario);
-//        return ResponseEntity.status(result.Status).body(result);
-//        
-//    } catch (Exception ex) {
-//        result.Status = 500;
-//        result.correct = false;
-//        result.errorMessage = "Error interno: " + ex.getMessage();
-//        return ResponseEntity.status(result.Status).body(result);
-//    }
-//}
+    @Operation(summary = "Editar una dirección")
+    @ApiResponse(responseCode = "200", description = "Dirección editada correctamente")
+    @PutMapping("{IdDireccion}")
+    public ResponseEntity Update(@PathVariable int IdDireccion,
+            @RequestBody Usuario usuario) {
+        usuario.Direcciones.get(0).setIdDireccion(IdDireccion);
+        Result result = direccionJPADAOImplementation.Update(usuario);
+        return ResponseEntity.status(result.Status).body(result);
+    }
 
     
     //GETBYID

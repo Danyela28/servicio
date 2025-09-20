@@ -1,6 +1,7 @@
 
 package com.TGarciaProgramacionNCapas25.Proyect.JPA;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 
@@ -10,6 +11,11 @@ public class Result {
     public Exception ex;
     public Object object;
     public List<Object> objects;
+    @JsonIgnore
     public int Status;
+    
+    public List<ErrorCM> errores;
+    public Boolean archivoCorrecto;
+    public String path;
     
 }

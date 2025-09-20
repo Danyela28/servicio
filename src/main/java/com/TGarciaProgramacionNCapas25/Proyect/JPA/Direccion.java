@@ -80,9 +80,6 @@ public class Direccion {
         this.NumeroExterior = NumeroExterior;
     }
 
-   
-
-    
 
   
 }
