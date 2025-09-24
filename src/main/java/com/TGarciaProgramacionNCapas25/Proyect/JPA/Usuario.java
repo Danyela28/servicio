@@ -58,6 +58,7 @@ public class Usuario {
     @JoinColumn (name="idrol")
     public Rol Rol;
     
+    
     @OneToMany(mappedBy="Usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Direccion>Direcciones = new ArrayList<>();
    
@@ -178,8 +179,11 @@ public class Usuario {
         this.Status = Status;
     }
 
-    
-
-    
-    
+//    public List<Direccion> getDirecciones() {
+//        return Direcciones;
+//    }
+//
+//    public void setDirecciones(List<Direccion> Direcciones) {
+//        this.Direcciones = Direcciones;
+//    }
 }

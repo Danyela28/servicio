@@ -43,13 +43,13 @@ private ServiceUsuario serviceUsuario;
         
     }
 
-    @PostMapping
-    public ResponseEntity ADD(@RequestBody Usuario usuario){
-        
-        Result result = serviceUsuario.AddUsuario(usuario);
-        return ResponseEntity.status(result.Status).body(result);
-        
-    }
+//    @PostMapping
+//    public ResponseEntity ADD(@RequestBody Usuario usuario){
+//        
+//        Result result = serviceUsuario.AddUsuario(usuario);
+//        return ResponseEntity.status(result.Status).body(result);
+//        
+//    }
     //Update @PutMapping("/{IdUsuario}")  Update(@PathVariable int IdUsuario, @RequestBody Usuario usuario
 //    @PutMapping("/{IdUsuario}")
     @PutMapping

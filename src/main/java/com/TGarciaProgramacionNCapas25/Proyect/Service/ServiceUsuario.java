@@ -51,26 +51,26 @@ public class ServiceUsuario {
         }
         return result;
     }
-    public Result AddUsuario(Usuario usuario){
-        
-        if (usuario.get != null) {
-            usuario.getDirecciones().forEach(d -> d.setUsuario(usuario));
-        }
-       
-        Result result = new Result();
-        try{
-            result.correct=true;
-            result.object= iRepositoryUsuario.save(usuario);
-            result.Status=200;
-            
-        }catch(Exception ex){
-            result.ex=ex;
-            result.correct=false;
-            result.errorMessage=ex.getLocalizedMessage();
-            result.Status=500;
-        }
-        return result;  
-    }
+//    public Result AddUsuario(Usuario usuario){
+//        
+//        if (usuario.getDirecciones() != null) {
+//            usuario.getDirecciones().forEach(d -> d.setUsuario(usuario));
+//        }
+//       
+//        Result result = new Result();
+//        try{
+//            result.correct=true;
+//            result.object= iRepositoryUsuario.save(usuario);
+//            result.Status=200;
+//            
+//        }catch(Exception ex){
+//            result.ex=ex;
+//            result.correct=false;
+//            result.errorMessage=ex.getLocalizedMessage();
+//            result.Status=500;
+//        }
+//        return result;  
+//    }
     public Result DeleteUsuario(int IdUsuario){
         Result result = new Result();
         try{

@@ -2,6 +2,7 @@
 package com.TGarciaProgramacionNCapas25.Proyect.JPA;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,9 +28,10 @@ public class Direccion {
     @ManyToOne
     @JoinColumn(name="idcolonia")
     public Colonia colonia;
-    @JsonIgnore
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idusuario", nullable = false)
+    @JsonIgnore
     public Usuario Usuario;
 
    
@@ -80,6 +82,20 @@ public class Direccion {
         this.NumeroExterior = NumeroExterior;
     }
 
+    public Colonia getColonia() {
+        return colonia;
+    }
 
-  
+    public void setColonia(Colonia colonia) {
+        this.colonia = colonia;
+    }
+
+//    public Usuario getUsuario() {
+//        return Usuario;
+//    }
+//
+//    public void setUsuario(Usuario Usuario) {
+//        this.Usuario = Usuario;
+//    }
+
 }
