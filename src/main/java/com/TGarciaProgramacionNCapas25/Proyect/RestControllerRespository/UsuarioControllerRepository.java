@@ -32,6 +32,8 @@ private ServiceUsuario serviceUsuario;
     public ResponseEntity GetAllRepository(){
         
         Result result = serviceUsuario.GetAllRepository();
+
+
         return ResponseEntity.status(result.Status).body(result);
  
     }
@@ -43,15 +45,14 @@ private ServiceUsuario serviceUsuario;
         
     }
 
-//    @PostMapping
-//    public ResponseEntity ADD(@RequestBody Usuario usuario){
-//        
-//        Result result = serviceUsuario.AddUsuario(usuario);
-//        return ResponseEntity.status(result.Status).body(result);
-//        
-//    }
-    //Update @PutMapping("/{IdUsuario}")  Update(@PathVariable int IdUsuario, @RequestBody Usuario usuario
-//    @PutMapping("/{IdUsuario}")
+    @PostMapping
+    public ResponseEntity ADD(@RequestBody Usuario usuario){
+        
+        Result result = serviceUsuario.AddUsuario(usuario);
+        return ResponseEntity.status(result.Status).body(result);
+        
+    }
+
     @PutMapping
     public ResponseEntity<Result> UpDate(@RequestBody Usuario usuario) {
         Result result = serviceUsuario.UpDate(usuario);

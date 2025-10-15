@@ -2,6 +2,7 @@
 package com.TGarciaProgramacionNCapas25.Proyect.Service;
 
 import com.TGarciaProgramacionNCapas25.Proyect.DAO.IRepositoryUsuario;
+import com.TGarciaProgramacionNCapas25.Proyect.JPA.Direccion;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Result;
 import com.TGarciaProgramacionNCapas25.Proyect.JPA.Usuario;
 import java.util.List;
@@ -51,26 +52,30 @@ public class ServiceUsuario {
         }
         return result;
     }
-//    public Result AddUsuario(Usuario usuario){
-//        
-//        if (usuario.getDirecciones() != null) {
-//            usuario.getDirecciones().forEach(d -> d.setUsuario(usuario));
-//        }
-//       
-//        Result result = new Result();
-//        try{
-//            result.correct=true;
-//            result.object= iRepositoryUsuario.save(usuario);
-//            result.Status=200;
-//            
-//        }catch(Exception ex){
-//            result.ex=ex;
-//            result.correct=false;
-//            result.errorMessage=ex.getLocalizedMessage();
-//            result.Status=500;
-//        }
-//        return result;  
-//    }
+    public Result AddUsuario(Usuario usuario){
+        
+     
+        Result result = new Result();
+        try{
+            if(usuario.Direcciones != null){
+                for(Direccion direccion : usuario.Direcciones){
+                direccion.Usuario = usuario;
+                 }
+            
+            }
+            result.correct=true;
+            result.object= iRepositoryUsuario.save(usuario);
+            result.Status=200;
+            
+        }catch(Exception ex){
+            result.ex=ex;
+            result.correct=false;
+            result.errorMessage=ex.getLocalizedMessage();
+            result.Status=500;
+        }
+        return result;  
+    }
+    
     public Result DeleteUsuario(int IdUsuario){
         Result result = new Result();
         try{

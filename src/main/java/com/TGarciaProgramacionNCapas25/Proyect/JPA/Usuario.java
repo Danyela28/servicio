@@ -37,8 +37,8 @@ public class Usuario {
     private Date FechaNacimiento;
     @Column(name="celular")
     private String Celular;
-    @Column(name="username")
-    private String UserName;
+    @Column(name="username", nullable = false, unique = true)
+    private String userName;
     @Column(name="email")
     private String Email;
     @Column(name="password")
@@ -72,7 +72,7 @@ public class Usuario {
         this.ApellidoMaterno=ApellidoMaterno;
         this.FechaNacimiento=FechaNacimiento;
         this.Celular=Celular;
-        this.UserName=UserName;
+        this.userName=UserName;
         this.Email=Email;
         this.Sexo=Sexo;
         this.Password=Password;
@@ -126,10 +126,10 @@ public class Usuario {
         this.Celular = Celular;
     }
     public String getUserName(){
-        return UserName;
+        return userName;
     }
-    public void setUserName(String userName){
-        this.UserName = userName;
+    public void setUserName(String UserName){
+        this.userName = UserName;
     }
     public String getEmail(){
         return Email;
